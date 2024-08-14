@@ -11,12 +11,11 @@ VALUES  ('Store Managers'),
 
 INSERT INTO roles (title, salary, department_id)
 VALUES  
-    -- Store Manager Department (id = 1)    
+        -- Store Manager Department (id = 1)    
         ('Store Manager', 100000, 1),
         ('Assistant Store Manager', 80000, 1),
 
-
-    -- Sales Department (id = 2)
+        -- Sales Department (id = 2)
         ('Sales Associate', 40000, 2),
         ('Sales Manager', 60000, 2),
 
