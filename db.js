@@ -4,9 +4,8 @@ const { Pool } = require('pg');
 // Connect to database
 const pool = new Pool(
   {
-    // TODO: Enter PostgreSQL username
+    // Enter PostgreSQL username, password, host, database, and port
     user: 'postgres',
-    // TODO: Enter PostgreSQL password
     password: 'swag',
     host: 'localhost',
     database: 'employees_db',
