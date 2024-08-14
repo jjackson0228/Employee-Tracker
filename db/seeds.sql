@@ -11,39 +11,39 @@ VALUES  ('Store Managers'),
 
 INSERT INTO roles (title, salary, department_id)
 VALUES  
-        -- Store Manager Department (id = 1)    
-        ('Store Manager', 100000, 1),
-        ('Assistant Store Manager', 80000, 1),
+        -- Store Manager  
+        ('Store Manager', 100000 (SELECT id FROM department WHERE name = 'Store Managers')),
+        ('Assistant Store Manager', 80000, (SELECT id FROM department WHERE name = 'Store Managers')),
 
-        -- Sales Department (id = 2)
-        ('Sales Associate', 40000, 2),
-        ('Sales Manager', 60000, 2),
+        -- Sales Department 
+        ('Sales Associate', 40000, (SELECT id FROM department WHERE name = 'Sales')),
+        ('Sales Manager', 60000, (SELECT id FROM department WHERE name = 'Sales')),
 
-        -- Repairs Department (id = 3)
-        ('Technician', 45000, 3),
-        ('Repair Manager', 55000, 3),
+        -- Repairs Department
+        ('Technician', 45000, (SELECT id FROM department WHERE name = 'Repairs')),
+        ('Repair Manager', 55000, (SELECT id FROM department WHERE name = 'Repairs')),
 
-        -- Electric Guitars Department (id = 4)
-        ('Electric Guitar Specialist', 42000, 4),
-        ('Electric Guitar Manager', 55000, 4),
+        -- Electric Guitars Department 
+        ('Electric Guitar Specialist', 42000, (SELECT id FROM department WHERE name = 'Electric Guitars')),
+        ('Electric Guitar Manager', 55000, (SELECT id FROM department WHERE name = 'Electric Guitars')),
 
-        -- Drums Department (id = 5)
-        ('Drum Specialist', 40000, 5),
-        ('Drum Manager', 55000, 5),
+        -- Drums Department 
+        ('Drum Specialist', 40000, (SELECT id FROM department WHERE name = 'Drums')),
+        ('Drum Manager', 55000, (SELECT id FROM department WHERE name = 'Drums')),
          
-          -- Audio Equipment Department (id = 6)
-        ('Audio Equipment Specialist', 45000, 6),
-        ('Audio Equipment Manager', 55000, 6),
+          -- Audio Equipment Department 
+        ('Audio Equipment Specialist', 45000, (SELECT id FROM department WHERE name = 'Audio Equipment')),
+        ('Audio Equipment Manager', 55000, (SELECT id FROM department WHERE name = 'Audio Equipment')),
 
-        -- Bass Guitars Department (id = 7)
-        ('Bass Guitar Specialist', 42000, 7),
-        ('Bass Guitar Manager', 55000, 7),
+        -- Bass Guitars Department 
+        ('Bass Guitar Specialist', 42000, (SELECT id FROM department WHERE name = 'Bass Guitars')),
+        ('Bass Guitar Manager', 55000, (SELECT id FROM department WHERE name = 'Bass Guitars')),
 
-        -- Acoustic Guitars Department (id = 8)
-        ('Acoustic Guitar Specialist', 42000, 8),
-        ('Acoustic Guitar Manager', 55000, 8),
+        -- Acoustic Guitars Department 
+        ('Acoustic Guitar Specialist', 42000, (SELECT id FROM department WHERE name = 'Acoustic Guitars')),
+        ('Acoustic Guitar Manager', 55000, (SELECT id FROM department WHERE name = 'Acoustic Guitars')),
 
-         -- Lessons Department (id = 9)
-        ('Guitar Instructor', 45000, 9),
-        ('Acoustic Instructor', 45000, 9)
-        ('Drum Instructor', 45000, 9);
+         -- Lessons Department 
+        ('Guitar Instructor', 45000, (SELECT id FROM department WHERE name = 'Lessons')),
+        ('Acoustic Instructor', 45000, (SELECT id FROM department WHERE name = 'Lessons'))
+        ('Drum Instructor', 45000, (SELECT id FROM department WHERE name = 'Lessons'));
