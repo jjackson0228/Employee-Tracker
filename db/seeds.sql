@@ -9,7 +9,7 @@ VALUES  ('Store Managers'),
         ('Acoustic Guitars'),
         ('Lessons');
 
-INSERT INTO roles (title, salary, department_id)
+INSERT INTO role (title, salary, department_id)
 VALUES  
         -- Store Manager  
         ('Store Manager', 100000 (SELECT id FROM department WHERE name = 'Store Managers')),
