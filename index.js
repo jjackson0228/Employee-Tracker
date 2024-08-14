@@ -16,9 +16,9 @@ async function viewDepartments() {
 async function viewRoles() {
   try {
     const res = await pool.query(`
-      SELECT roles.id, roles.title, roles.salary, department.name AS department 
-      FROM roles 
-      JOIN department ON roles.department_id = department.id
+      SELECT role.id, role.title, role.salary, department.name AS department 
+      FROM role
+      JOIN department ON role.department_id = department.id
     `);
     console.table(res.rows);
   } catch (err) {
