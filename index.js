@@ -6,19 +6,46 @@ const fs = require('fs');
 const cTable = require('console.table');
 
 // Function to read SQL file and return queries
+// const readSQLFile = (filePath) => {
+// const fileContents = fs.readFileSync(filePath, 'utf8');
+// return fileContents.split(';').filter((query) => query.trim());
+// };
+
+// Function to read SQL file and return queries
 const readSQLFile = (filePath) => {
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  return fileContents.split(';').filter((query) => query.trim());
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        console.error('Error reading SQL file:', err);
+        reject(err);
+      } else {
+        resolve(data.split(';').filter((query) => query.trim()));
+      }
+    });
+  });
 };
 
 // Function to query the database
 const queryDatabase = async (query, params = []) => {
-  const result = await pool.query(query, params);
-  return result.rows;
+  try {
+    const result = await pool.query(query, params);
+    return result.rows;
+  } catch (err) {
+    console.error('Database query error:', err);
+    throw err;
+  }
 };
 
-// Read queries from query.sql
-const queries = readSQLFile(path.join(__dirname, 'query.sql'));
+// Load queries from query.sql
+let queries = [];
+const loadQueries = async () => {
+  try {
+    queries = await readSQLFile(path.join(__dirname, 'db', 'query.sql'));
+  } catch (err) {
+    console.error('Failed to load SQL queries:', err);
+    process.exit(1); // Exit if there's an error loading queries
+  }
+};
 
 // Function to view all departments
 const viewDepartments = async () => {
@@ -146,6 +173,8 @@ const updateEmployeeRole = async () => {
 
 // Main function to display menu and handle user input
 const main = async () => {
+  await loadQueries(); // Ensure queries are loaded before proceeding
+
   const { action } = await inquirer.prompt({
     type: 'list',
     name: 'action',
@@ -186,7 +215,7 @@ const main = async () => {
       break;
     case 'Exit':
       console.log('Exiting...');
-      pool.end();
+      await pool.end();
       return;
   }
 
