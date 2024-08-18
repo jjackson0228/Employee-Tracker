@@ -3,7 +3,7 @@ VALUES
         ('Sales'), --Department 1 
         ('Repairs'), --Department 2
         ('Instruments'), --Department 3
-        ('Audio Equipment') --Department 4
+        ('Audio Equipment'), --Department 4
         ('Lessons'); --Department 5
 
 INSERT INTO role (title, salary, department_id)
