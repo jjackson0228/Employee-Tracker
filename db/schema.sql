@@ -4,21 +4,21 @@ CREATE DATABASE employees_db;
 \c employees_db;
 
 CREATE TABLE department (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(30) UNIQUE NOT NULL --To hold department name 
+  id SERIAL PRIMARY KEY, -- Auto-incrementing primary key
+  name VARCHAR(30) UNIQUE NOT NULL -- Department name, must be unique and not null
 );
 
 CREATE TABLE role (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(30) UNIQUE NOT NULL,--hold role title
-    salary DECIMAL NOT NULL, -- hold role salary
-    department_id INTEGER NOT NULL REFERENCES department(id) --hold reference to department(id)
+    id SERIAL PRIMARY KEY, -- Auto-incrementing primary key
+    title VARCHAR(30) UNIQUE NOT NULL,-- Role title, must be unique and not null
+    salary DECIMAL NOT NULL, -- Role salary, must be a decimal value and not null
+    department_id INTEGER NOT NULL REFERENCES department(id) -- Foreign key referencing department(id)
 );
 
 CREATE TABLE employee (
-    id SERIAL PRIMARY KEY,
-    first_name VARCHAR(30) NOT NULL, --hold employee first name
-    last_name VARCHAR(30) NOT NULL, --hold employee last name
-    role_id INTEGER NOT NULL REFERENCES role(id),--hold reference to role(id)
-    manager_id INTEGER REFERENCES employee(id) --hold reference to employee(id)
+    id SERIAL PRIMARY KEY, -- Auto-incrementing primary key
+    first_name VARCHAR(30) NOT NULL,   -- Employee's first name, not null
+    last_name VARCHAR(30) NOT NULL,-- Employee's last name, not null
+    role_id INTEGER NOT NULL REFERENCES role(id),-- Foreign key referencing role(id)
+    manager_id INTEGER REFERENCES employee(id) -- Self-referencing foreign key for the employee's manager
 );
