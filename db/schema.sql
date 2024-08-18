@@ -22,7 +22,7 @@ CREATE TABLE employee (
     id SERIAL PRIMARY KEY, -- Auto-incrementing primary key
     first_name VARCHAR(30) NOT NULL,   -- Employee's first name, not null
     last_name VARCHAR(30) NOT NULL,-- Employee's last name, not null
-    role_id INTEGER NOT NULL
+    role_id INTEGER NOT NULL,
     FOREIGN KEY (role_id)
       REFERENCES role(id),-- Foreign key referencing role(id)
     manager_id INTEGER,
