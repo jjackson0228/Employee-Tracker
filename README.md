@@ -32,7 +32,7 @@ This application is an user-friendly created interface for viewing and changing 
 
 ## Video Example of how to use
 
-Walkthrough video for an example: <iframe src="https://drive.google.com/file/d/1Vx7t5ElVxJ1jugwY07HMNaULafvTOcos/preview"width="640"height="480"></iframe>
+[Walkthrough video link](https://drive.google.com/file/d/1Vx7t5ElVxJ1jugwY07HMNaULafvTOcos/preview)
 
 ## Tools and languages used
 
