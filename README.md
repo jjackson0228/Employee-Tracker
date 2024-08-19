@@ -32,7 +32,7 @@ This application is an user-friendly created interface for viewing and changing 
 
 ## Video Example of how to use
 
-- Here is a walkthrough video for an example
+Walkthrough video for an example: <iframe src="https://drive.google.com/file/d/1Vx7t5ElVxJ1jugwY07HMNaULafvTOcos/preview"width="640"height="480"></iframe>
 
 ## Tools and languages used
 
