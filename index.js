@@ -132,7 +132,13 @@ const addEmployee = async () => {
       type: 'list',
       name: 'manager_id',
       message: 'Select the employee’s manager (or leave blank if none):',
-      choices: [...managers, { name: 'None', value: null }],
+      choices: [
+        ...managers.map((manager) => ({
+          name: manager.name,
+          value: manager.id,
+        })),
+        { name: 'None', value: null },
+      ],
     },
   ]);
   await queryDatabase(
