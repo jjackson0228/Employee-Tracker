@@ -6,12 +6,6 @@ const fs = require('fs');
 const cTable = require('console.table');
 
 // Function to read SQL file and return queries
-// const readSQLFile = (filePath) => {
-// const fileContents = fs.readFileSync(filePath, 'utf8');
-// return fileContents.split(';').filter((query) => query.trim());
-// };
-
-// Function to read SQL file and return queries
 const readSQLFile = (filePath) => {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', (err, data) => {
@@ -147,6 +141,55 @@ const addEmployee = async () => {
   );
   console.log('Employee added successfully.');
 };
+//function to view all employees and their managers
+const viewEmployeesByManager = async () => {
+  const managers = await queryDatabase(
+    "SELECT id, CONCAT(first_name, ' ', last_name) AS name FROM employee WHERE id IN (SELECT DISTINCT manager_id FROM employee WHERE manager_id IS NOT NULL)"
+  );
+
+  for (const manager of managers) {
+    console.log(`\nManager: ${manager.name}`);
+    const employees = await queryDatabase(
+      "SELECT CONCAT(first_name, ' ', last_name) AS name FROM employee WHERE manager_id = $1",
+      [manager.id]
+    );
+    console.table(employees);
+  }
+};
+// function to view all the employees in a department table
+const viewEmployeesByDepartment = async () => {
+  const departments = await queryDatabase('SELECT id, name FROM department');
+
+  for (const department of departments) {
+    console.log(`\nDepartment: ${department.name}`);
+    const employees = await queryDatabase(
+      "SELECT CONCAT(first_name, ' ', last_name) AS name FROM employee INNER JOIN role ON employee.role_id = role.id WHERE role.department_id = $1",
+      [department.id]
+    );
+    console.table(employees);
+  }
+};
+//function to view a departments budget total of all employees in department
+const viewDepartmentBudget = async () => {
+  const departments = await queryDatabase('SELECT id, name FROM department');
+  const { department_id } = await inquirer.prompt({
+    type: 'list',
+    name: 'department_id',
+    message: 'Select the department to view its total budget:',
+    choices: departments.map((dep) => ({ name: dep.name, value: dep.id })),
+  });
+
+  const totalSalary = await queryDatabase(
+    'SELECT SUM(salary) AS budget FROM role INNER JOIN employee ON role.id = employee.role_id WHERE role.department_id = $1',
+    [department_id]
+  );
+
+  console.log(
+    `Total Utilized Budget for ${
+      departments.find((d) => d.id === department_id).name
+    }: $${totalSalary[0].budget}`
+  );
+};
 
 // Function to update an employee’s role
 const updateEmployeeRole = async () => {
@@ -180,7 +223,7 @@ const updateEmployeeRole = async () => {
 // Main function to display menu and handle user input
 const main = async () => {
   await loadQueries(); // Ensure queries are loaded before proceeding
-
+  //command prompt to choose changes or checks that user wants to make in the database
   const { action } = await inquirer.prompt({
     type: 'list',
     name: 'action',
@@ -189,14 +232,17 @@ const main = async () => {
       'View all departments',
       'View all roles',
       'View all employees',
+      'View employees by manager',
+      'View employees by department',
       'Add a department',
       'Add a role',
       'Add an employee',
       'Update an employee role',
+      'View the total utilized budget of a department',
       'Exit',
     ],
   });
-
+  //calls all actions to update the functions
   switch (action) {
     case 'View all departments':
       await viewDepartments();
@@ -218,6 +264,15 @@ const main = async () => {
       break;
     case 'Update an employee role':
       await updateEmployeeRole();
+      break;
+    case 'View employees by manager':
+      await viewEmployeesByManager();
+      break;
+    case 'View employees by department':
+      await viewEmployeesByDepartment();
+      break;
+    case 'View the total utilized budget of a department':
+      await viewDepartmentBudget();
       break;
     case 'Exit':
       console.log('Exiting...');
