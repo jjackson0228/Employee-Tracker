@@ -24,18 +24,18 @@ VALUES  ('Sales Manager',60000,1), -- Role in Department 1 (Sales)
         ('Lessons Coordinator',50000,5); -- Role in Department 5 (Lessons)
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id) 
-VALUES   ('Jimmy', 'John', 1, NULL),   -- Sales Manager, no manager
-    ('Sarah', 'Connor', 2, 1),    -- Sales Specialist, reports to Sales Manager
-    ('Alex', 'Smith', 3, 2),      -- Sales Associate, reports to Sales Specialist
-    ('Mike', 'Ross', 4, NULL),    -- Repairs Manager, no manager
-    ('Jane', 'Doe', 5, 4),        -- Repairs Specialist, reports to Repairs Manager
-    ('John', 'Doe', 6, 5),        -- Repairs Technician, reports to Repairs Specialist
-    ('Chris', 'Evans', 7, NULL),  -- Instruments Manager, no manager
-    ('Bruce', 'Wayne', 8, 7),     -- Instruments Specialist, reports to Instruments Manager
-    ('Clark', 'Kent', 9, 8),      -- Instruments Associate, reports to Instruments Specialist
-    ('Tony', 'Stark', 10, NULL),  -- Audio Equipment Manager, no manager
-    ('Natasha', 'Romanoff', 11, 10), -- Audio Equipment Specialist, reports to Audio Equipment Manager
-    ('Steve', 'Rogers', 12, 11),  -- Audio Equipment Associate, reports to Audio Equipment Specialist
-    ('Peter', 'Parker', 13, NULL),-- Lessons Manager, no manager
-    ('Diana', 'Prince', 14, 13),  -- Lessons Instructor, reports to Lessons Manager
-    ('Barry', 'Allen', 15, 13);   -- Lessons Coordinator, reports to Lessons Manager
+VALUES   ('Jimmy', 'John', 1, 1),   -- Sales Manager, 
+    ('Sarah', 'Connor', 2, NULL),    -- Sales Specialist, reports to Sales Manager
+    ('Alex', 'Smith', 3, NULL),      -- Sales Associate, reports to Sales Specialist
+    ('Mike', 'Ross', 4, 2,    -- Repairs Manager, 
+    ('Jane', 'Doe', 5, NULL),        -- Repairs Specialist, reports to Repairs Manager
+    ('John', 'Doe', 6, NULL),        -- Repairs Technician, reports to Repairs Specialist
+    ('Chris', 'Evans', 7, 3),  -- Instruments Manager, 
+    ('Bruce', 'Wayne', 8, NULL),     -- Instruments Specialist, reports to Instruments Manager
+    ('Clark', 'Kent', 9, NULL),      -- Instruments Associate, reports to Instruments Specialist
+    ('Tony', 'Stark', 10, 4),  -- Audio Equipment Manager, 
+    ('Natasha', 'Romanoff', 11, NULL), -- Audio Equipment Specialist, reports to Audio Equipment Manager
+    ('Steve', 'Rogers', 12, NULL),  -- Audio Equipment Associate, reports to Audio Equipment Specialist
+    ('Peter', 'Parker', 13, 5),-- Lessons Manager, 
+    ('Diana', 'Prince', 14, NULL),  -- Lessons Instructor, reports to Lessons Manager
+    ('Barry', 'Allen', 15, NULL);   -- Lessons Coordinator, reports to Lessons Manager
